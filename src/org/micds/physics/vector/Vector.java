@@ -10,16 +10,16 @@ import java.util.List;
 @Value
 public class Vector implements Scalar<Double> {
 	@NonNull
-	private final List<Double> components;
+	private final List<Double> components; // TODO: make me immutable!
 	private Double magnitude;
 	private Double degree;
-
-	// TODO: caching, make components immutable
+	private boolean isUnit;
 
 	public Vector(@NonNull final List<Double> comps) {
 		this.components = new ArrayList<>(comps);
 		this.magnitude = getMagnitude();
 		this.degree = getDegrees();
+		this.isUnit = (this.magnitude - 1.0) < 0.0000001;
 	}
 
 	public Vector(@NonNull final Double... comps) {
@@ -65,6 +65,7 @@ public class Vector implements Scalar<Double> {
 
 		this.components = new ArrayList<>(Arrays.asList(x, y));
 		this.magnitude = getMagnitude();
+		this.isUnit = magnitude == 1.0;
 	}
 
 	public Vector add(final Vector other) {
@@ -102,9 +103,8 @@ public class Vector implements Scalar<Double> {
 
 		double sum = 0.0;
 
-		for (int i = 0; i < n; i++) {
+		for (int i = 0; i < n; i++)
 			sum += components.get(i) * other.getComponents().get(i);
-		}
 
 		return sum;
 	}
@@ -129,10 +129,6 @@ public class Vector implements Scalar<Double> {
 			return 0.0;
 
 		return Math.toDegrees(Math.acos(components.get(0) / this.getMagnitude()));
-	}
-
-	public boolean isUnit() {
-		return this.getMagnitude() == 1.0;
 	}
 
 	public List<Double> getComponents() {
