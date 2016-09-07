@@ -1,6 +1,6 @@
 package org.micds.physics.vector;
 
-import lombok.*;
+import lombok.NonNull;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass

@@ -98,7 +98,7 @@ public class Vector implements Scalar<Double> {
 	public double dotProduct(final Vector other) {
 		final int n = numComponents();
 		if (n != other.numComponents())
-			throw new IllegalArgumentException("org.micds.physics.vector.Vector Dot Product cannot be computed with two Vectors of different dimensions");
+			throw new IllegalArgumentException("Vector Dot Product cannot be computed with two Vectors of different dimensions");
 
 		double sum = 0.0;
 
