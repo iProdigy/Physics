@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.micds.physics.util.MathUtil.floatsEqual;
+import static org.micds.physics.util.MathUtil.getQuadrant;
+
 @Value
 public class Vector implements Scalar<Double> {
 	@NonNull
@@ -21,7 +24,7 @@ public class Vector implements Scalar<Double> {
 		this.components = new UnmodifiableArrayList<>(comps.toArray(new Double[n]), n);
 		this.magnitude = getMagnitude();
 		this.degree = getDegrees();
-		this.isUnit = Math.abs(this.magnitude - 1.0) < 0.0000001;
+		this.isUnit = floatsEqual(this.magnitude, 1.0);
 	}
 
 	public Vector(@NonNull final Double... comps) {
@@ -36,11 +39,9 @@ public class Vector implements Scalar<Double> {
 			deg += 360;
 
 		this.degree = deg;
-
-		final int quadrant = (int) (deg / 90) % 4 + 1;
 		double x = 0, y = 0;
 
-		switch (quadrant) {
+		switch (getQuadrant(deg)) {
 			case 1:
 				x = magnitude * Math.cos(Math.toRadians(deg));
 				y = magnitude * Math.sin(Math.toRadians(deg));
@@ -66,8 +67,8 @@ public class Vector implements Scalar<Double> {
 		}
 
 		this.components = new UnmodifiableArrayList<>(new Double[]{x, y}, 2);
-		this.magnitude = getMagnitude();
-		this.isUnit = magnitude == 1.0;
+		this.magnitude = magnitude;
+		this.isUnit = floatsEqual(this.magnitude, 1.0);
 	}
 
 	public Vector add(final Vector other) {
