@@ -31,6 +31,9 @@ public class VectorTester {
 		System.out.println(d);
 		System.out.println(d.getMagnitude());
 		System.out.println(d.degreeDiff(new Vector(-1.0, 0.0)));
+		System.out.println("X");
+		Vector e = new Vector(10.0,15.0,0.0);
+		System.out.println(e.getDegree());
 	}
 
 }

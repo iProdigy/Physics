@@ -13,6 +13,8 @@ public class Vector implements Scalar<Double> {
 	@NonNull
 	@Wither
 	private final List<Double> components;
+	private double magnitude;
+	private double degree;
 
 	// TODO: caching, make components immutable
 
@@ -24,6 +26,15 @@ public class Vector implements Scalar<Double> {
 		this(Arrays.asList(comps));
 	}
 
+	public Vector(final double x, final double y, final double z) {
+		if(z != 0) {
+			// Yikes 3D
+		} else {
+			magnitude = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+			degree = Math.acos(((Math.pow(x, 2) - Math.pow(magnitude, 2) - Math.pow(y, 2)) / (-2 * magnitude * y)));
+		}
+		this.components = new ArrayList<>(Arrays.asList(x, y, z));
+	}
 	// TODO: what if user wants constructor to be x, y not mag, deg
 	public Vector(final double magnitude, final double degrees) {
 		double deg = degrees % 360;
@@ -60,11 +71,16 @@ public class Vector implements Scalar<Double> {
 		}
 
 		this.components = new ArrayList<>(Arrays.asList(x, y));
+		this.magnitude = Math.sqrt(this.dotProduct(this));
 	}
 
 	@Override
 	public Double getMagnitude() {
-		return Math.sqrt(this.dotProduct(this));
+		return magnitude;
+	}
+
+	public Double getDegree() {
+		return degree;
 	}
 
 	public Vector add(final Vector other) {
