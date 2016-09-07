@@ -1,4 +1,6 @@
-public class Main {
+package org.micds.physics.vector;
+
+public class VectorTester {
 
 	public static void main(String[] args) {
 		/*

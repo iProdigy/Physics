@@ -1,3 +1,5 @@
+package org.micds.physics.vector;
+
 import lombok.NonNull;
 import lombok.Value;
 import lombok.experimental.Wither;
@@ -96,7 +98,7 @@ public class Vector implements Scalar<Double> {
 	public double dotProduct(final Vector other) {
 		final int n = numComponents();
 		if (n != other.numComponents())
-			throw new IllegalArgumentException("Vector Dot Product cannot be computed with two Vectors of different dimensions");
+			throw new IllegalArgumentException("org.micds.physics.vector.Vector Dot Product cannot be computed with two Vectors of different dimensions");
 
 		double sum = 0.0;
 
@@ -106,27 +108,8 @@ public class Vector implements Scalar<Double> {
 		return sum;
 	}
 
-	public static double dotProduct(final double magA, final double magB, final double deg) {
-		return magA * magB * Math.cos(Math.toRadians(deg));
-	}
-
-	public static Vector crossProduct3D(final Vector a, final Vector b) {
-		// TODO: Generalize for x dimensions
-		if (a.numComponents() != b.numComponents() || a.numComponents() != 3)
-			throw new IllegalArgumentException("Both Vectors must occupy three dimensions");
-
-		final double aX = a.getComponents().get(0), aY = a.getComponents().get(1), aZ = a.getComponents().get(2);
-		final double bX = b.getComponents().get(0), bY = b.getComponents().get(1), bZ = b.getComponents().get(2);
-
-		return new Vector(aY * bZ - bY * aZ, aZ * bX - bZ * aX, aX * bY - bX * aY);
-	}
-
-	public static double getDegreeDiff(final Vector a, final Vector b) {
-		return Math.toDegrees(Math.acos((a.dotProduct(b)) / (a.getMagnitude() * b.getMagnitude())));
-	}
-
 	public double degreeDiff(final Vector other) {
-		return getDegreeDiff(this, other);
+		return Vectors.getDegreeDiff(this, other);
 	}
 
 	public boolean isUnit() {
