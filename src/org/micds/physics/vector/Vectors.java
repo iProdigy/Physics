@@ -22,6 +22,9 @@ public class Vectors {
 	}
 
 	public static double getDegreeDiff(@NonNull final Vector a, @NonNull final Vector b) {
+		if (a.getMagnitude() == 0.0 || b.getMagnitude() == 0.0)
+			return 0.0;
+
 		return Math.toDegrees(Math.acos((a.dotProduct(b)) / (a.getMagnitude() * b.getMagnitude())));
 	}
 
