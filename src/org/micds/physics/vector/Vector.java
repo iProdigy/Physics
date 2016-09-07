@@ -1,5 +1,6 @@
 package org.micds.physics.vector;
 
+import com.sun.javafx.UnmodifiableArrayList;
 import lombok.NonNull;
 import lombok.Value;
 
@@ -10,16 +11,17 @@ import java.util.List;
 @Value
 public class Vector implements Scalar<Double> {
 	@NonNull
-	private final List<Double> components; // TODO: make me immutable!
+	private final List<Double> components;
 	private Double magnitude;
 	private Double degree;
 	private boolean isUnit;
 
 	public Vector(@NonNull final List<Double> comps) {
-		this.components = new ArrayList<>(comps);
+		final int n = comps.size();
+		this.components = new UnmodifiableArrayList<>(comps.toArray(new Double[n]), n);
 		this.magnitude = getMagnitude();
 		this.degree = getDegrees();
-		this.isUnit = (this.magnitude - 1.0) < 0.0000001;
+		this.isUnit = Math.abs(this.magnitude - 1.0) < 0.0000001;
 	}
 
 	public Vector(@NonNull final Double... comps) {
@@ -63,7 +65,7 @@ public class Vector implements Scalar<Double> {
 				break;
 		}
 
-		this.components = new ArrayList<>(Arrays.asList(x, y));
+		this.components = new UnmodifiableArrayList<>(new Double[]{x, y}, 2);
 		this.magnitude = getMagnitude();
 		this.isUnit = magnitude == 1.0;
 	}

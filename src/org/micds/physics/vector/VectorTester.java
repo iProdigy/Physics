@@ -2,6 +2,8 @@ package org.micds.physics.vector;
 
 public class VectorTester {
 
+	// TODO: JUnit
+
 	public static void main(String[] args) {
 		/*
 		final Vector a = new Vector(1.0, 0.0, -3.0);
