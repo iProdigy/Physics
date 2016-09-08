@@ -26,6 +26,7 @@ public class VectorTester {
 		System.out.println(d);
 		*/
 
+		/*
 		Vector a = new Vector(0.800, 90);
 		Vector b = new Vector(0.300, 180);
 		Vector c = new Vector(0.100, 270);
@@ -36,6 +37,23 @@ public class VectorTester {
 		System.out.println("X");
 		Vector e = new Vector(10.0, 15.0, 0.0);
 		System.out.println(e.getDegree());
+		*/
+
+		/*
+		Vector a = new Vector(3.0, 0.0);
+		Vector b = new Vector(5.0, 120);
+		Vector c = a.add(b);
+		System.out.println(c);
+		*/
+
+		Vector a = new Vector(1, 15.0);
+		System.out.println(a);
+
+		Vector b = new Vector(1.0, 10.0);
+		System.out.println(b);
+
+		Vector c = new Vector(1.0, 30 + 90);
+		System.out.println(c);
 	}
 
 }

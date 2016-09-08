@@ -134,6 +134,10 @@ public class Vector implements Scalar<Double> {
 		return Math.toDegrees(Math.acos(components.get(0) / this.getMagnitude()));
 	}
 
+	public Vector normalized() {
+		return new Vector(1.0, this.degree);
+	}
+
 	public List<Double> getComponents() {
 		return this.components;
 	}
