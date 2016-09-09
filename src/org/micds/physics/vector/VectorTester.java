@@ -46,6 +46,7 @@ public class VectorTester {
 		System.out.println(c);
 		*/
 
+		/*
 		Vector a = new Vector(1, 15.0);
 		System.out.println(a);
 
@@ -53,6 +54,12 @@ public class VectorTester {
 		System.out.println(b);
 
 		Vector c = new Vector(1.0, 30 + 90);
+		System.out.println(c);
+		*/
+
+		Vector a = new Vector(75, 30);
+		Vector b = new Vector(100, 180 - 45);
+		Vector c = a.add(b);
 		System.out.println(c);
 	}
 

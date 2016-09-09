@@ -138,8 +138,8 @@ public class Vector implements Scalar<Double> {
 		return new Vector(1.0, this.degree);
 	}
 
-	public List<Double> getComponents() {
-		return this.components;
+	public Double getComponent(final int index) {
+		return this.components.get(index);
 	}
 
 	public int numComponents() {
