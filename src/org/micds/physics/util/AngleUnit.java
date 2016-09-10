@@ -2,10 +2,10 @@ package org.micds.physics.util;
 
 import static org.micds.physics.util.Conversions.*;
 
-public enum DegreeUnit {
+public enum AngleUnit {
 	DEGREES, RADIANS, GRADIANS, TURNS;
 
-	public double convFactor(final DegreeUnit to) {
+	public double convFactor(final AngleUnit to) {
 		if (this == to)
 			return 1.0;
 

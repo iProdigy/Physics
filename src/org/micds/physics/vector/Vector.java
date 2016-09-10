@@ -3,29 +3,27 @@ package org.micds.physics.vector;
 import com.sun.javafx.UnmodifiableArrayList;
 import lombok.NonNull;
 import lombok.Value;
-import org.micds.physics.util.Degree;
-import org.micds.physics.util.DegreeUnit;
+import org.micds.physics.util.Angle;
+import org.micds.physics.util.AngleUnit;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.micds.physics.util.MathUtil.floatsEqual;
-import static org.micds.physics.util.MathUtil.getQuadrant;
 
 @Value
 public class Vector implements Scalar<Double> {
-	@NonNull
 	private final List<Double> components;
 	private final Double magnitude;
-	private final Degree degree;
+	private final Angle angle;
 	private final boolean isUnit;
 
 	public Vector(@NonNull final List<Double> comps) {
 		final int n = comps.size();
 		this.components = new UnmodifiableArrayList<>(comps.toArray(new Double[n]), n);
 		this.magnitude = getMagnitude();
-		this.degree = new Degree(DegreeUnit.DEGREES, getDeg());
+		this.angle = new Angle(getDegree(), AngleUnit.DEGREES);
 		this.isUnit = floatsEqual(this.magnitude, 1.0);
 	}
 
@@ -33,38 +31,41 @@ public class Vector implements Scalar<Double> {
 		this(Arrays.asList(comps));
 	}
 
-	// TODO: make dev specify what the unit of degrees argument is
-	public Vector(final double magnitude, final double degrees) {
-		double deg = degrees % 360;
+	public Vector(final double magnitude, final double angle, final AngleUnit angleUnit) {
+		this(magnitude, new Angle(angle, angleUnit));
+	}
 
-		if (deg < 0)
-			deg += 360;
+	public Vector(final double magnitude, @NonNull final Angle angle) {
+		this.angle = angle.simplified();
+		final Angle temp;
+		final double x, y;
 
-		this.degree = new Degree(DegreeUnit.DEGREES, deg);
-		double x = 0, y = 0;
-
-		switch (getQuadrant(deg)) {
-			case 1:
-				x = magnitude * Math.cos(Math.toRadians(deg));
-				y = magnitude * Math.sin(Math.toRadians(deg));
+		switch (this.angle.getQuadrant()) {
+			case I:
+				x = magnitude * this.angle.cos();
+				y = magnitude * this.angle.sin();
 				break;
 
-			case 2:
-				deg = 180 - deg;
-				x = -magnitude * Math.cos(Math.toRadians(deg));
-				y = magnitude * Math.sin(Math.toRadians(deg));
+			case II:
+				temp = this.angle.withValue(180 - this.angle.getValue());
+				x = -magnitude * temp.cos();
+				y = magnitude * temp.sin();
 				break;
 
-			case 3:
-				deg -= 180;
-				x = -magnitude * Math.cos(Math.toRadians(deg));
-				y = -magnitude * Math.sin(Math.toRadians(deg));
+			case III:
+				temp = this.angle.withValue(this.angle.getValue() - 180);
+				x = -magnitude * temp.cos();
+				y = -magnitude * temp.sin();
 				break;
 
-			case 4:
-				deg = 360 - deg;
-				x = magnitude * Math.cos(Math.toRadians(deg));
-				y = -magnitude * Math.sin(Math.toRadians(deg));
+			case IV:
+				temp = this.angle.withValue(this.angle.getValue() - 360);
+				x = magnitude * temp.cos();
+				y = -magnitude * temp.sin();
+				break;
+
+			default:
+				x = y = 0;
 				break;
 		}
 
@@ -122,13 +123,17 @@ public class Vector implements Scalar<Double> {
 		return Math.sqrt(this.dotProduct(this));
 	}
 
-	public double degreeDiff(final Vector other) {
-		return Vectors.getDegreeDiff(this, other);
+	public Angle angularDiff(@NonNull final Vector other) {
+		return Vectors.angularDifference(this, other);
 	}
 
-	public Double getDeg() {
-		if (this.degree != null)
-			return this.degree.getDegrees();
+	public double degreeDiff(@NonNull final Vector other) {
+		return this.angularDiff(other).getDegrees();
+	}
+
+	public Double getDegree() {
+		if (this.angle != null)
+			return this.angle.getDegrees();
 
 		if (numComponents() == 0)
 			return 0.0;
@@ -137,7 +142,7 @@ public class Vector implements Scalar<Double> {
 	}
 
 	public Vector normalized() {
-		return new Vector(1.0, this.degree.getDegrees());
+		return new Vector(1.0, this.angle);
 	}
 
 	public Double getComponent(final int index) {

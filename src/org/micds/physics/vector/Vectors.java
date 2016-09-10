@@ -2,6 +2,8 @@ package org.micds.physics.vector;
 
 import lombok.NonNull;
 import lombok.experimental.UtilityClass;
+import org.micds.physics.util.Angle;
+import org.micds.physics.util.AngleUnit;
 
 @UtilityClass
 public class Vectors {
@@ -21,11 +23,11 @@ public class Vectors {
 		return new Vector(aY * bZ - bY * aZ, aZ * bX - bZ * aX, aX * bY - bX * aY);
 	}
 
-	public static double getDegreeDiff(@NonNull final Vector a, @NonNull final Vector b) {
+	public static Angle angularDifference(@NonNull final Vector a, @NonNull final Vector b) {
 		if (a.getMagnitude() == 0.0 || b.getMagnitude() == 0.0)
-			return 0.0;
+			return Angle.ZERO;
 
-		return Math.toDegrees(Math.acos((a.dotProduct(b)) / (a.getMagnitude() * b.getMagnitude())));
+		return new Angle(Math.acos((a.dotProduct(b)) / (a.getMagnitude() * b.getMagnitude())), AngleUnit.RADIANS);
 	}
 
 	/**
@@ -37,7 +39,7 @@ public class Vectors {
 	 * @return the interpolated vector
 	 * @see org.micds.physics.util.MathUtil#interpolate(double, double, double)
 	 */
-	public static Vector lerp(final Vector a, final Vector b, final double percent) {
+	public static Vector lerp(@NonNull final Vector a, @NonNull final Vector b, final double percent) {
 		return a.multiply(1 - percent).add(b.multiply(percent));
 	}
 

@@ -1,6 +1,6 @@
 package org.micds.physics.util;
 
-import lombok.experimental.*;
+import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class Conversions {
