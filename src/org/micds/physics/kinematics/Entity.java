@@ -16,8 +16,17 @@ public class Entity {
 	public Entity(final int dimensions) {
 		this.dimensions = dimensions;
 		this.position = new double[dimensions];
+		setZeroVelocityAndAcceleration();
+	}
 
-		Double[] zero = new Double[dimensions];
+	public Entity(final double[] position) {
+		this.dimensions = position.length;
+		this.position = Arrays.copyOf(position, position.length);
+		setZeroVelocityAndAcceleration();
+	}
+
+	private void setZeroVelocityAndAcceleration() {
+		final Double[] zero = new Double[dimensions];
 		Arrays.fill(zero, 0.0D);
 
 		this.velocity = new Vector(zero);

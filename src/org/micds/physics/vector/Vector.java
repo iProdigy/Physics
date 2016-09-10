@@ -3,6 +3,8 @@ package org.micds.physics.vector;
 import com.sun.javafx.UnmodifiableArrayList;
 import lombok.NonNull;
 import lombok.Value;
+import org.micds.physics.util.Degree;
+import org.micds.physics.util.DegreeUnit;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,15 +17,15 @@ import static org.micds.physics.util.MathUtil.getQuadrant;
 public class Vector implements Scalar<Double> {
 	@NonNull
 	private final List<Double> components;
-	private Double magnitude;
-	private Double degree;
-	private boolean isUnit;
+	private final Double magnitude;
+	private final Degree degree;
+	private final boolean isUnit;
 
 	public Vector(@NonNull final List<Double> comps) {
 		final int n = comps.size();
 		this.components = new UnmodifiableArrayList<>(comps.toArray(new Double[n]), n);
 		this.magnitude = getMagnitude();
-		this.degree = getDegrees();
+		this.degree = new Degree(DegreeUnit.DEGREES, getDeg());
 		this.isUnit = floatsEqual(this.magnitude, 1.0);
 	}
 
@@ -31,14 +33,14 @@ public class Vector implements Scalar<Double> {
 		this(Arrays.asList(comps));
 	}
 
-	// TODO: what if user wants constructor to be x, y not mag, deg
+	// TODO: make dev specify what the unit of degrees argument is
 	public Vector(final double magnitude, final double degrees) {
 		double deg = degrees % 360;
 
 		if (deg < 0)
 			deg += 360;
 
-		this.degree = deg;
+		this.degree = new Degree(DegreeUnit.DEGREES, deg);
 		double x = 0, y = 0;
 
 		switch (getQuadrant(deg)) {
@@ -124,9 +126,9 @@ public class Vector implements Scalar<Double> {
 		return Vectors.getDegreeDiff(this, other);
 	}
 
-	public Double getDegrees() {
+	public Double getDeg() {
 		if (this.degree != null)
-			return this.degree;
+			return this.degree.getDegrees();
 
 		if (numComponents() == 0)
 			return 0.0;
@@ -135,7 +137,7 @@ public class Vector implements Scalar<Double> {
 	}
 
 	public Vector normalized() {
-		return new Vector(1.0, this.degree);
+		return new Vector(1.0, this.degree.getDegrees());
 	}
 
 	public Double getComponent(final int index) {

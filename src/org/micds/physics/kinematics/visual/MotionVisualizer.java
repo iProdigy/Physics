@@ -1,4 +1,4 @@
-package org.micds.physics.kinematics;
+package org.micds.physics.kinematics.visual;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
