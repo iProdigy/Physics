@@ -1,10 +1,11 @@
 package org.micds.physics.vector;
 
-import org.junit.Assert;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 import org.junit.Test;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
-import org.junit.runner.notification.Failure;
 import org.micds.physics.util.AngleUnit;
 
 public class VectorTester {
@@ -18,17 +19,18 @@ public class VectorTester {
 		};
 
 		for (Vector v : vects)
-			Assert.assertNotNull(v);
+			assertNotNull(v);
 	}
 
 	@Test
 	public void addition() {
-
+		assertEquals(new Vector(20.0, -50.0, 3.5).add(new Vector(-29.0, 25.0, -3.5)), new Vector(-9.0, -25.0, 0.0));
+		assertEquals(new Vector(5.0 * Math.sqrt(2), 45, AngleUnit.DEGREES).add(new Vector(5.0, 5.0)), new Vector(10.0, 10.0));
 	}
 
 	@Test
 	public void subtraction() {
-
+		assertEquals(new Vector(1.0, 10.0, 100.0).subtract(new Vector(100.0, 10.0, 1.0)), new Vector(-99.0, 0.0, 99.0));
 	}
 
 	@Test
@@ -43,7 +45,17 @@ public class VectorTester {
 	}
 
 	@Test
+	public void components() {
+
+	}
+
+	@Test
 	public void magnitude() {
+
+	}
+
+	@Test
+	public void unit() {
 
 	}
 
@@ -58,13 +70,9 @@ public class VectorTester {
 	}
 
 	public static void main(String[] args) {
-		Result result = JUnitCore.runClasses(VectorTester.class);
-
-		for (final Failure failure : result.getFailures()) {
-			System.out.println(failure.toString());
-		}
-
-		System.out.println(result.wasSuccessful());
+		final Result result = JUnitCore.runClasses(VectorTester.class);
+		result.getFailures().forEach(System.out::println);
+		System.out.println(result.wasSuccessful() ? "we gucci" : "it broke yo");
 	}
 
 }
