@@ -1,68 +1,70 @@
 package org.micds.physics.vector;
 
-import org.micds.physics.util.*;
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.JUnitCore;
+import org.junit.runner.Result;
+import org.junit.runner.notification.Failure;
+import org.micds.physics.util.AngleUnit;
 
 public class VectorTester {
 
-	// TODO: JUnit
+	@Test
+	public void creation() {
+		Vector[] vects = {
+				new Vector(), new Vector(1337, 69, AngleUnit.DEGREES), new Vector(1337, 0.5 * Math.PI, AngleUnit.RADIANS),
+				new Vector(1337, 0.5 * Math.PI, AngleUnit.GRADIANS), new Vector(1337, 0.25, AngleUnit.TURNS),
+				new Vector(5.0, -10.0, 15.0)
+		};
+
+		for (Vector v : vects)
+			Assert.assertNotNull(v);
+	}
+
+	@Test
+	public void addition() {
+
+	}
+
+	@Test
+	public void subtraction() {
+
+	}
+
+	@Test
+	public void multiplication() {
+
+	}
+
+
+	@Test
+	public void division() {
+
+	}
+
+	@Test
+	public void magnitude() {
+
+	}
+
+	@Test
+	public void angle() {
+
+	}
+
+	@Test
+	public void angleDiff() {
+
+	}
 
 	public static void main(String[] args) {
-		/*
-		final Vector a = new Vector(1.0, 0.0, -3.0);
-		final Vector b = new Vector(-2.0, 5.0, 1.0);
-		final Vector c = new Vector(3.0, 1.0, 1.0);
+		Result result = JUnitCore.runClasses(VectorTester.class);
 
-		System.out.println(a.multiply(2).subtract((b.subtract(c)).multiply(3)));
-		System.out.println(new Vector(0.0, 1.0).degreeDiff(new Vector(1.0, 0.0)));
-		*/
+		for (final Failure failure : result.getFailures()) {
+			System.out.println(failure.toString());
+		}
 
-		/*
-		Vector v = new Vector(100, 240, AngleUnit.DEGREES);
-		System.out.println(v.getComponents());
-		*/
-
-		/*
-		Vector a = new Vector(2, 75);
-		Vector b = new Vector(4, -15);
-		Vector d = a.multiply(3).add(b);
-		System.out.println(d);
-		*/
-
-		/*
-		Vector a = new Vector(0.800, 90, AngleUnit.DEGREES);
-		Vector b = new Vector(0.300, 180, AngleUnit.DEGREES);
-		Vector c = new Vector(0.100, 270, AngleUnit.DEGREES);
-		Vector d = a.add(b).add(c);
-		System.out.println(d);
-		System.out.println(d.getMagnitude());
-		System.out.println(d.degreeDiff(new Vector(-1.0, 0.0)));
-		System.out.println("X");
-		Vector e = new Vector(10.0, 15.0, 0.0);
-		System.out.println(e.getDegree());
-		*/
-
-		/*
-		Vector a = new Vector(3.0, 0.0);
-		Vector b = new Vector(5.0, 120, AngleUnit.DEGREES);
-		Vector c = a.add(b);
-		System.out.println(c);
-		*/
-
-		/*
-		Vector a = new Vector(1, 15.0, AngleUnit.DEGREES);
-		System.out.println(a);
-
-		Vector b = new Vector(1.0, 10.0, AngleUnit.DEGREES);
-		System.out.println(b);
-
-		Vector c = new Vector(1.0, 30 + 90, AngleUnit.DEGREES);
-		System.out.println(c);
-		*/
-
-		Vector a = new Vector(75, 30, AngleUnit.DEGREES);
-		Vector b = new Vector(100, 180 - 45, AngleUnit.DEGREES);
-		Vector c = a.add(b);
-		System.out.println(c);
+		System.out.println(result.wasSuccessful());
 	}
 
 }
