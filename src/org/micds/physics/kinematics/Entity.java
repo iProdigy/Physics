@@ -14,9 +14,7 @@ public class Entity {
 	private Vector velocity, acceleration;
 
 	public Entity(final int dimensions) {
-		this.dimensions = dimensions;
-		this.position = new double[dimensions];
-		setZeroVelocityAndAcceleration();
+		this(new double[dimensions]);
 	}
 
 	public Entity(final double[] position) {
@@ -47,9 +45,8 @@ public class Entity {
 			position[d] = position[d] + velocity.getComponent(d) * time + 0.5 * acceleration.getComponent(d) * time * time;
 		}
 
+		// update velocity based on the assumption that acceleration is unchanging over time
 		this.velocity = this.velocity.add(this.acceleration.multiply(time));
-
-		// assume acceleration is constant
 	}
 
 }

@@ -2,6 +2,8 @@ package org.micds.physics.util;
 
 import lombok.experimental.UtilityClass;
 
+import java.util.Arrays;
+
 @UtilityClass
 public class MathUtil {
 	private static final double EPSILON = 0.0000001;
@@ -21,6 +23,12 @@ public class MathUtil {
 
 	public static double interpolate(final double now, final double then, final double percent) {
 		return (1 - percent) * now + percent * then;
+	}
+
+	public static Double[] zeroArray(final int dimensions) {
+		final Double[] array = new Double[dimensions];
+		Arrays.fill(array, 0.0);
+		return array;
 	}
 
 }

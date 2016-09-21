@@ -4,10 +4,15 @@ import lombok.NonNull;
 import lombok.experimental.UtilityClass;
 import org.micds.physics.util.Angle;
 import org.micds.physics.util.AngleUnit;
+import org.micds.physics.util.MathUtil;
 
 @UtilityClass
 public class Vectors {
-	public static final Vector FORWARD, BACK, UP, DOWN, LEFT, RIGHT, ZERO, ONE;
+	/**
+	 * Standard acceleration due to gravity (g) equalling -9.8 m/s^2
+	 */
+	public static final Double STANDARD_GRAVITY;
+	public static final Vector FORWARD, BACK, UP, DOWN, LEFT, RIGHT, ZERO, ONE, GRAVITY, GRAVITY3D;
 
 	public static double dotProduct(final double magA, final double magB, final double deg) {
 		return magA * magB * Math.cos(Math.toRadians(deg));
@@ -43,7 +48,29 @@ public class Vectors {
 		return a.multiply(1 - percent).add(b.multiply(percent));
 	}
 
+	public static Vector gravity(final int dimensions) {
+		switch (dimensions) {
+			case 2:
+				return GRAVITY;
+
+			case 3:
+				return GRAVITY3D;
+
+			default:
+				final Double[] acceleration = MathUtil.zeroArray(dimensions);
+
+				if (dimensions >= 2)
+					acceleration[1] = STANDARD_GRAVITY;
+
+				return new Vector(acceleration);
+		}
+	}
+
 	static {
+		STANDARD_GRAVITY = -9.8;
+		GRAVITY = new Vector(0.0, STANDARD_GRAVITY);
+		GRAVITY3D = new Vector(0.0, STANDARD_GRAVITY, 0.0);
+
 		FORWARD = new Vector(0.0, 0.0, 1.0);
 		BACK = new Vector(0.0, 0.0, -1.0);
 		UP = new Vector(0.0, 1.0, 0.0);
