@@ -20,9 +20,9 @@ public class Ball extends Sphere {
 		this(radius, new Entity(position));
 	}
 
-	public Ball(final double radius, final Entity ent) {
+	public Ball(final double radius, final Entity entity) {
 		super(radius);
-		this.ent = ent;
+		this.ent = entity;
 	}
 
 	// TODO: Bridge gap between physics entity and javafx sphere representation
