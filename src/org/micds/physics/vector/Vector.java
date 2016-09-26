@@ -104,6 +104,10 @@ public class Vector implements Scalar<Double> {
 		return new Vector(comps);
 	}
 
+	public Vector multiply(final Scalar<Double> scalar) {
+		return this.multiply(scalar.getMagnitude());
+	}
+
 	public Vector divide(final double scalar) {
 		return this.multiply(1 / scalar);
 	}
