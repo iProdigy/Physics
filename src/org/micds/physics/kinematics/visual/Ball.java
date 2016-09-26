@@ -1,18 +1,18 @@
 package org.micds.physics.kinematics.visual;
 
+import javafx.scene.shape.Sphere;
 import lombok.Data;
 import org.micds.physics.kinematics.Entity;
 
 @Data
-public class Ball {
-	private final double radius;
+public class Ball extends Sphere {
 	private final Entity ent;
 
 	public Ball(final double radius, final double[] position) {
-		this.radius = radius;
+		super(radius);
 		this.ent = new Entity(position);
 	}
 
-	// TODO
+	// TODO: Bridge gap between physics entity and javafx sphere representation
 
 }

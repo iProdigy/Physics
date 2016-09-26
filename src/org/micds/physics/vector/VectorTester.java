@@ -38,7 +38,6 @@ public class VectorTester {
 
 	}
 
-
 	@Test
 	public void division() {
 
