@@ -2,6 +2,7 @@ package org.micds.physics.kinematics;
 
 import lombok.Data;
 import lombok.NonNull;
+import lombok.experimental.Wither;
 import org.micds.physics.vector.Vector;
 
 import java.util.Arrays;
@@ -21,6 +22,13 @@ public class Entity {
 		this.dimensions = position.length;
 		this.position = Arrays.copyOf(position, position.length);
 		setZeroVelocityAndAcceleration();
+	}
+
+	public Entity(final Entity copy) {
+		this.dimensions = copy.dimensions;
+		this.position = Arrays.copyOf(copy.getPosition(), this.dimensions);
+		this.velocity = copy.getVelocity();
+		this.acceleration = copy.getAcceleration();
 	}
 
 	private void setZeroVelocityAndAcceleration() {

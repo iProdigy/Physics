@@ -31,4 +31,17 @@ public class MathUtil {
 		return array;
 	}
 
+	public static double dist(final double[] pos1, final double[] pos2) {
+		if (pos1.length != pos2.length)
+			return Double.NaN;
+
+		double sum = 0.0;
+
+		for (int i = 0; i < pos1.length; i++) {
+			sum += Math.pow(pos1[i] - pos2[i], 2);
+		}
+
+		return Math.sqrt(sum);
+	}
+
 }

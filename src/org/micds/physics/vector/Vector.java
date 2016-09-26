@@ -9,6 +9,8 @@ import org.micds.physics.util.AngleUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.DoubleStream;
 
 import static org.micds.physics.util.MathUtil.floatsEqual;
 
@@ -29,6 +31,10 @@ public class Vector implements Scalar<Double> {
 
 	public Vector(@NonNull final Double... comps) {
 		this(Arrays.asList(comps));
+	}
+
+	public Vector(@NonNull final double[] comps) {
+		this(DoubleStream.of(comps).mapToObj(Double::valueOf).collect(Collectors.toList()));
 	}
 
 	public Vector(final double magnitude, final double angle, final AngleUnit angleUnit) {
