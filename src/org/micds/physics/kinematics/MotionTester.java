@@ -11,7 +11,7 @@ public class MotionTester {
 	public static void main(String[] args) {
 		// TODO: Unit testing
 
-		final Projectile ball = new Projectile(new double[]{0.0, 50.0}, new Vector(10, 20, AngleUnit.DEGREES));
+		final Projectile ball = new Projectile(new double[]{0.0, 50.0}, new Vector(25, 0, AngleUnit.DEGREES));
 		System.out.println(simulate(ball));
 	}
 

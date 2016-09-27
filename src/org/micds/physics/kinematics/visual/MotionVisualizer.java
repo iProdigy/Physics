@@ -25,6 +25,7 @@ public class MotionVisualizer extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		primaryStage.setTitle("jPhysics");
 		primaryStage.setResizable(false);
 		this.scene = new Scene(this.createContent());
 		handleMouseEvents();
