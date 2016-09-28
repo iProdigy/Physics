@@ -1,6 +1,7 @@
 package org.micds.physics.kinematics.visual;
 
 import javafx.application.Application;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.PerspectiveCamera;
@@ -11,6 +12,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
 import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Translate;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import org.micds.physics.kinematics.Projectile;
 import org.micds.physics.vector.Vector;
@@ -26,7 +28,6 @@ public class MotionVisualizer extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		primaryStage.setTitle("jPhysics");
-		primaryStage.setResizable(false);
 		this.scene = new Scene(this.createContent());
 		handleMouseEvents();
 		primaryStage.setScene(scene);
@@ -59,7 +60,10 @@ public class MotionVisualizer extends Application {
 		root.getChildren().add(ballObj);
 
 		// Use a SubScene
-		SubScene subScene = new SubScene(root, 500, 500, true, SceneAntialiasing.BALANCED);
+		final Rectangle2D screen = Screen.getPrimary().getVisualBounds();
+		SubScene subScene = new SubScene(root, screen.getWidth() * .75, screen.getHeight() * .75, true, SceneAntialiasing.BALANCED);
+		subScene.setLayoutX(screen.getMinX());
+		subScene.setLayoutY(screen.getMinY());
 		subScene.setFill(Color.TRANSPARENT);
 		subScene.setCamera(camera);
 
@@ -76,8 +80,8 @@ public class MotionVisualizer extends Application {
 			final double dx = (mouseX - me.getSceneX()), dy = (mouseY - me.getSceneY());
 
 			if (me.isPrimaryButtonDown() && me.isControlDown()) {
-				rotX.setAngle(rotX.getAngle() - (dy / ballObj.getRadius() * 2 * 360) * (Math.PI / 180));
-				rotY.setAngle(rotY.getAngle() - (dx / ballObj.getRadius() * 2 * -360) * (Math.PI / 180));
+				rotX.setAngle(rotX.getAngle() - (dy / Math.pow(ballObj.getRadius(), 2) * 360) * (Math.PI / 180));
+				rotY.setAngle(rotY.getAngle() - (dx / Math.pow(ballObj.getRadius(), 2) * -360) * (Math.PI / 180));
 			}
 
 			mouseX = me.getSceneX();

@@ -67,7 +67,7 @@ public class Vector implements Scalar<Double> {
 			case IV:
 				temp = this.angle.withValue(this.angle.getValue() - 360);
 				x = magnitude * temp.cos();
-				y = -magnitude * temp.sin();
+				y = magnitude * temp.sin();
 				break;
 
 			default:
