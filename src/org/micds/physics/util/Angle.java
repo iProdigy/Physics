@@ -2,11 +2,12 @@ package org.micds.physics.util;
 
 import lombok.Value;
 import lombok.experimental.Wither;
+import org.jetbrains.annotations.*;
 
 import static org.micds.physics.util.AngleUnit.*;
 
 @Value
-public class Angle {
+public class Angle implements Comparable<Angle> {
 	public static final Angle ZERO = new Angle(0.0, AngleUnit.RADIANS);
 
 	@Wither
@@ -14,7 +15,7 @@ public class Angle {
 	private final AngleUnit unit;
 
 	public Angle convert(final AngleUnit to) {
-		return new Angle(this.value * this.unit.convFactor(to), to);
+		return (to == this.unit) ? this : new Angle(this.value * this.unit.convFactor(to), to);
 	}
 
 	public Angle simplified() {
@@ -24,6 +25,22 @@ public class Angle {
 			deg += 360;
 
 		return new Angle(deg * DEGREES.convFactor(this.unit), this.unit);
+	}
+
+	public Angle add(final Angle other) {
+		return this.withValue(this.value + other.convert(this.unit).getValue());
+	}
+
+	public Angle subtract(final Angle other) {
+		return this.withValue(this.value - other.convert(this.unit).getValue());
+	}
+
+	public Angle multiply(final double scalar) {
+		return this.withValue(this.value * scalar);
+	}
+
+	public Angle divide(final double scalar) {
+		return this.multiply(1 / scalar);
 	}
 
 	public Quadrant getQuadrant() {
@@ -72,6 +89,11 @@ public class Angle {
 
 	public double cot() {
 		return 1 / tan();
+	}
+
+	@Override
+	public int compareTo(@NotNull Angle o) {
+		return Double.compare(this.getDegrees(), o.getDegrees());
 	}
 
 }
