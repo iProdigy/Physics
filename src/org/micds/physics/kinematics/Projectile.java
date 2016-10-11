@@ -1,7 +1,7 @@
 package org.micds.physics.kinematics;
 
-import org.micds.physics.vector.Vector;
-import org.micds.physics.vector.Vectors;
+import org.micds.physics.util.vector.Vector;
+import org.micds.physics.util.vector.Vectors;
 
 public class Projectile extends Entity {
 

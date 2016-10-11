@@ -1,4 +1,4 @@
-package org.micds.physics.util;
+package org.micds.physics.util.angle;
 
 import static org.micds.physics.util.Conversions.*;
 

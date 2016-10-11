@@ -1,4 +1,4 @@
-package org.micds.physics.vector;
+package org.micds.physics.util.vector;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -6,7 +6,7 @@ import static org.junit.Assert.assertNotNull;
 import org.junit.Test;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
-import org.micds.physics.util.AngleUnit;
+import org.micds.physics.util.angle.AngleUnit;
 
 public class VectorTester {
 

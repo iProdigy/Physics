@@ -2,7 +2,7 @@ package org.micds.physics.kinematics;
 
 import lombok.Data;
 import lombok.NonNull;
-import org.micds.physics.vector.Vector;
+import org.micds.physics.util.vector.Vector;
 
 import java.util.Arrays;
 

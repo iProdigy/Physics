@@ -1,9 +1,9 @@
-package org.micds.physics.vector;
+package org.micds.physics.util.vector;
 
 import lombok.NonNull;
 import lombok.experimental.UtilityClass;
-import org.micds.physics.util.Angle;
-import org.micds.physics.util.AngleUnit;
+import org.micds.physics.util.angle.Angle;
+import org.micds.physics.util.angle.AngleUnit;
 import org.micds.physics.util.MathUtil;
 
 @UtilityClass

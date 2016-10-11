@@ -1,7 +1,7 @@
 package org.micds.physics.kinematics;
 
-import org.micds.physics.util.AngleUnit;
-import org.micds.physics.vector.Vector;
+import org.micds.physics.util.angle.AngleUnit;
+import org.micds.physics.util.vector.Vector;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

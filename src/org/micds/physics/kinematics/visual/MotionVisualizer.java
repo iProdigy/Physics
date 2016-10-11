@@ -15,7 +15,7 @@ import javafx.scene.transform.Translate;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import org.micds.physics.kinematics.Projectile;
-import org.micds.physics.vector.Vector;
+import org.micds.physics.util.vector.Vector;
 
 import java.util.Random;
 
