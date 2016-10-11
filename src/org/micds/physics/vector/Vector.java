@@ -5,6 +5,8 @@ import lombok.NonNull;
 import lombok.Value;
 import org.micds.physics.util.Angle;
 import org.micds.physics.util.AngleUnit;
+import org.micds.physics.util.abstraction.Computational;
+import org.micds.physics.util.abstraction.Scalar;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,7 +17,7 @@ import java.util.stream.DoubleStream;
 import static org.micds.physics.util.MathUtil.floatsEqual;
 
 @Value
-public class Vector implements Scalar<Double> {
+public class Vector implements Scalar<Double>, Computational<Vector> {
 	private final List<Double> components;
 	private final Double magnitude;
 	private final Angle angle;
@@ -80,6 +82,7 @@ public class Vector implements Scalar<Double> {
 		this.isUnit = floatsEqual(this.magnitude, 1.0);
 	}
 
+	@Override
 	public Vector add(final Vector other) {
 		final List<Double> comps = new ArrayList<>(components);
 
@@ -94,22 +97,11 @@ public class Vector implements Scalar<Double> {
 		return new Vector(comps);
 	}
 
-	public Vector subtract(final Vector other) {
-		return this.add(other.multiply(-1));
-	}
-
+	@Override
 	public Vector multiply(final double scalar) {
 		final List<Double> comps = new ArrayList<>();
 		this.components.forEach(comp -> comps.add(comp * scalar));
 		return new Vector(comps);
-	}
-
-	public Vector multiply(final Scalar<Double> scalar) {
-		return this.multiply(scalar.getMagnitude());
-	}
-
-	public Vector divide(final double scalar) {
-		return this.multiply(1 / scalar);
 	}
 
 	public double dotProduct(final Vector other) {
