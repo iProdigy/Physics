@@ -6,11 +6,12 @@ import org.jetbrains.annotations.NotNull;
 import org.micds.physics.util.MathUtil;
 import org.micds.physics.util.Quadrant;
 import org.micds.physics.util.abstraction.Computational;
+import org.micds.physics.util.abstraction.Quantifiable;
 
 import static org.micds.physics.util.angle.AngleUnit.*;
 
 @Value
-public class Angle implements Comparable<Angle>, Computational<Angle> {
+public class Angle implements Quantifiable<Double>, Comparable<Angle>, Computational<Angle> {
 	public static final Angle ZERO = new Angle(0.0, RADIANS);
 
 	@Wither
@@ -91,6 +92,11 @@ public class Angle implements Comparable<Angle>, Computational<Angle> {
 
 	public double cot() {
 		return 1 / tan();
+	}
+
+	@Override
+	public Double getMagnitude() {
+		return this.getValue();
 	}
 
 	@Override

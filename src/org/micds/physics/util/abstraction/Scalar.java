@@ -3,9 +3,7 @@ package org.micds.physics.util.abstraction;
 import lombok.NonNull;
 
 @FunctionalInterface
-public interface Scalar extends Computational<Scalar> {
-	Double getMagnitude();
-
+public interface Scalar extends Quantifiable<Double>, Computational<Scalar> {
 	@Override
 	default Scalar add(@NonNull Scalar scalar) {
 		return () -> this.getMagnitude() + scalar.getMagnitude();

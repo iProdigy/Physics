@@ -2,7 +2,7 @@ package org.micds.physics.util.abstraction;
 
 import lombok.NonNull;
 
-public interface Computational<T extends Computational<T>> {
+public interface Computational<T extends Quantifiable<? extends Number> & Computational<T>> {
 	@NonNull
 	T add(@NonNull T t);
 
