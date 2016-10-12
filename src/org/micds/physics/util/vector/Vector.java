@@ -3,10 +3,9 @@ package org.micds.physics.util.vector;
 import com.sun.javafx.UnmodifiableArrayList;
 import lombok.NonNull;
 import lombok.Value;
+import org.micds.physics.util.abstraction.Computational;
 import org.micds.physics.util.angle.Angle;
 import org.micds.physics.util.angle.AngleUnit;
-import org.micds.physics.util.abstraction.Computational;
-import org.micds.physics.util.abstraction.Scalar;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,7 +16,7 @@ import java.util.stream.DoubleStream;
 import static org.micds.physics.util.MathUtil.floatsEqual;
 
 @Value
-public class Vector implements Scalar<Double>, Computational<Vector> {
+public class Vector implements Computational<Vector> {
 	private final List<Double> components;
 	private final Double magnitude;
 	private final Angle angle;
@@ -117,7 +116,6 @@ public class Vector implements Scalar<Double>, Computational<Vector> {
 		return sum;
 	}
 
-	@Override
 	public Double getMagnitude() {
 		if (this.magnitude != null)
 			return this.magnitude;

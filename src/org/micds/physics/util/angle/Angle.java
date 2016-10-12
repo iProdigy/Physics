@@ -3,12 +3,15 @@ package org.micds.physics.util.angle;
 import lombok.Value;
 import lombok.experimental.Wither;
 import org.jetbrains.annotations.NotNull;
-import org.micds.physics.util.*;
+import org.micds.physics.util.MathUtil;
+import org.micds.physics.util.Quadrant;
 import org.micds.physics.util.abstraction.Computational;
+
+import static org.micds.physics.util.angle.AngleUnit.*;
 
 @Value
 public class Angle implements Comparable<Angle>, Computational<Angle> {
-	public static final Angle ZERO = new Angle(0.0, AngleUnit.RADIANS);
+	public static final Angle ZERO = new Angle(0.0, RADIANS);
 
 	@Wither
 	private final double value;
@@ -24,7 +27,7 @@ public class Angle implements Comparable<Angle>, Computational<Angle> {
 		if (deg < 0)
 			deg += 360;
 
-		return new Angle(deg * AngleUnit.DEGREES.convFactor(this.unit), this.unit);
+		return new Angle(deg * DEGREES.convFactor(this.unit), this.unit);
 	}
 
 	@Override
@@ -47,19 +50,19 @@ public class Angle implements Comparable<Angle>, Computational<Angle> {
 	}
 
 	public double getDegrees() {
-		return this.getValue(AngleUnit.DEGREES);
+		return this.getValue(DEGREES);
 	}
 
 	public double getRadians() {
-		return this.getValue(AngleUnit.RADIANS);
+		return this.getValue(RADIANS);
 	}
 
 	public double getGradians() {
-		return this.getValue(AngleUnit.GRADIANS);
+		return this.getValue(GRADIANS);
 	}
 
 	public double getTurns() {
-		return this.getValue(AngleUnit.TURNS);
+		return this.getValue(TURNS);
 	}
 
 	private double getValue(final AngleUnit au) {

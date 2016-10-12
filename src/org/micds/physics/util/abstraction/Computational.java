@@ -10,7 +10,7 @@ public interface Computational<T extends Computational<T>> {
 	T multiply(double scalar);
 
 	@NonNull
-	default T multiply(@NonNull Scalar<Double> scalar) {
+	default T multiply(@NonNull Scalar scalar) {
 		return this.multiply(scalar.getMagnitude());
 	}
 
@@ -20,7 +20,7 @@ public interface Computational<T extends Computational<T>> {
 	}
 
 	@NonNull
-	default T divide(@NonNull Scalar<Double> scalar) {
+	default T divide(@NonNull Scalar scalar) {
 		return this.multiply(1 / scalar.getMagnitude());
 	}
 

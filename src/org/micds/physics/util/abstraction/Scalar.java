@@ -1,5 +1,18 @@
 package org.micds.physics.util.abstraction;
 
-public interface Scalar<T extends Number> {
-	T getMagnitude();
+import lombok.NonNull;
+
+@FunctionalInterface
+public interface Scalar extends Computational<Scalar> {
+	Double getMagnitude();
+
+	@Override
+	default Scalar add(@NonNull Scalar scalar) {
+		return () -> this.getMagnitude() + scalar.getMagnitude();
+	}
+
+	@Override
+	default Scalar multiply(double scalar) {
+		return () -> this.getMagnitude() * scalar;
+	}
 }
