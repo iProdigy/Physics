@@ -17,7 +17,7 @@ import java.util.stream.DoubleStream;
 import static org.micds.physics.util.MathUtil.floatsEqual;
 
 @Value
-public class Vector implements Quantifiable<Double>, Computational<Vector> {
+public class Vector implements Quantifiable<Double>, Computational<Vector>, Comparable<Vector> {
 	private final List<Double> components;
 	private final Double magnitude;
 	private final Angle angle;
@@ -153,6 +153,11 @@ public class Vector implements Quantifiable<Double>, Computational<Vector> {
 
 	public int numComponents() {
 		return this.components.size();
+	}
+
+	@Override
+	public int compareTo(@NonNull final Vector o) {
+		return Double.compare(this.magnitude, o.magnitude);
 	}
 
 }
