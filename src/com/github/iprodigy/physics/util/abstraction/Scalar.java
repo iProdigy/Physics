@@ -1,4 +1,4 @@
-package org.micds.physics.util.abstraction;
+package com.github.iprodigy.physics.util.abstraction;
 
 import lombok.NonNull;
 

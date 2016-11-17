@@ -1,14 +1,14 @@
-package org.micds.physics.util.angle;
+package com.github.iprodigy.physics.util.angle;
 
 import lombok.Value;
 import lombok.experimental.Wither;
 import org.jetbrains.annotations.NotNull;
-import org.micds.physics.util.MathUtil;
-import org.micds.physics.util.Quadrant;
-import org.micds.physics.util.abstraction.Computational;
-import org.micds.physics.util.abstraction.Quantifiable;
+import com.github.iprodigy.physics.util.MathUtil;
+import com.github.iprodigy.physics.util.Quadrant;
+import com.github.iprodigy.physics.util.abstraction.Computational;
+import com.github.iprodigy.physics.util.abstraction.Quantifiable;
 
-import static org.micds.physics.util.angle.AngleUnit.*;
+import static com.github.iprodigy.physics.util.angle.AngleUnit.*;
 
 @Value
 public class Angle implements Quantifiable<Double>, Comparable<Angle>, Computational<Angle> {
@@ -28,7 +28,7 @@ public class Angle implements Quantifiable<Double>, Comparable<Angle>, Computati
 		if (deg < 0)
 			deg += 360;
 
-		return new Angle(deg * DEGREES.convFactor(this.unit), this.unit);
+		return new Angle(deg * AngleUnit.DEGREES.convFactor(this.unit), this.unit);
 	}
 
 	@Override

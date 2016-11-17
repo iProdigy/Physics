@@ -1,6 +1,6 @@
-package org.micds.physics.util.angle;
+package com.github.iprodigy.physics.util.angle;
 
-import static org.micds.physics.util.Conversions.*;
+import static com.github.iprodigy.physics.util.Conversions.*;
 
 public enum AngleUnit {
 	DEGREES, RADIANS, GRADIANS, TURNS;

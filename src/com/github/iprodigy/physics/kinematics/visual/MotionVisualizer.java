@@ -1,4 +1,4 @@
-package org.micds.physics.kinematics.visual;
+package com.github.iprodigy.physics.kinematics.visual;
 
 import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
@@ -14,8 +14,8 @@ import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Translate;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import org.micds.physics.kinematics.Projectile;
-import org.micds.physics.util.vector.Vector;
+import com.github.iprodigy.physics.kinematics.Projectile;
+import com.github.iprodigy.physics.util.vector.Vector;
 
 import java.util.Random;
 

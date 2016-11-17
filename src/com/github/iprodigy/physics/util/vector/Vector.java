@@ -1,12 +1,12 @@
-package org.micds.physics.util.vector;
+package com.github.iprodigy.physics.util.vector;
 
 import com.sun.javafx.UnmodifiableArrayList;
 import lombok.NonNull;
 import lombok.Value;
-import org.micds.physics.util.abstraction.Computational;
-import org.micds.physics.util.abstraction.Quantifiable;
-import org.micds.physics.util.angle.Angle;
-import org.micds.physics.util.angle.AngleUnit;
+import com.github.iprodigy.physics.util.abstraction.Computational;
+import com.github.iprodigy.physics.util.abstraction.Quantifiable;
+import com.github.iprodigy.physics.util.angle.Angle;
+import com.github.iprodigy.physics.util.angle.AngleUnit;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.DoubleStream;
 
-import static org.micds.physics.util.MathUtil.floatsEqual;
+import static com.github.iprodigy.physics.util.MathUtil.floatsEqual;
 
 @Value
 public class Vector implements Quantifiable<Double>, Computational<Vector>, Comparable<Vector> {
@@ -115,6 +115,10 @@ public class Vector implements Quantifiable<Double>, Computational<Vector>, Comp
 			sum += components.get(i) * other.getComponents().get(i);
 
 		return sum;
+	}
+
+	public Vector crossProduct3D(@NonNull final Vector other) {
+		return Vectors.crossProduct3D(this, other);
 	}
 
 	@Override

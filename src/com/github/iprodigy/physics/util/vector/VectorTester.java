@@ -1,12 +1,15 @@
-package org.micds.physics.util.vector;
+package com.github.iprodigy.physics.util.vector;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import com.github.iprodigy.physics.util.angle.*;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
-import org.micds.physics.util.angle.AngleUnit;
+
+import java.util.*;
 
 public class VectorTester {
 
@@ -30,7 +33,7 @@ public class VectorTester {
 
 	@Test
 	public void subtraction() {
-		assertEquals(new Vector(1.0, 10.0, 100.0).subtract(new Vector(100.0, 10.0, 1.0)), new Vector(-99.0, 0.0, 99.0));
+		Assert.assertEquals(new Vector(1.0, 10.0, 100.0).subtract(new Vector(100.0, 10.0, 1.0)), new Vector(-99.0, 0.0, 99.0));
 	}
 
 	@Test

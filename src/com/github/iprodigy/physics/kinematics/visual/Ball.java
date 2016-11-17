@@ -1,8 +1,8 @@
-package org.micds.physics.kinematics.visual;
+package com.github.iprodigy.physics.kinematics.visual;
 
 import javafx.scene.shape.Sphere;
 import lombok.Data;
-import org.micds.physics.kinematics.Entity;
+import com.github.iprodigy.physics.kinematics.Entity;
 
 @Data
 public class Ball extends Sphere {

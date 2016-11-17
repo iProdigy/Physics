@@ -1,4 +1,4 @@
-package org.micds.physics.util;
+package com.github.iprodigy.physics.util;
 
 public enum Quadrant {
 	I, II, III, IV;

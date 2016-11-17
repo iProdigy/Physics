@@ -1,7 +1,7 @@
-package org.micds.physics.kinematics;
+package com.github.iprodigy.physics.kinematics;
 
-import org.micds.physics.util.vector.Vector;
-import org.micds.physics.util.vector.Vectors;
+import com.github.iprodigy.physics.util.vector.Vector;
+import com.github.iprodigy.physics.util.vector.Vectors;
 
 public class Projectile extends Entity {
 

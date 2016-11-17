@@ -1,8 +1,8 @@
-package org.micds.physics.kinematics;
+package com.github.iprodigy.physics.kinematics;
 
 import lombok.Data;
 import lombok.NonNull;
-import org.micds.physics.util.vector.Vector;
+import com.github.iprodigy.physics.util.vector.Vector;
 
 import java.util.Arrays;
 

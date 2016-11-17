@@ -1,10 +1,10 @@
-package org.micds.physics.util.vector;
+package com.github.iprodigy.physics.util.vector;
 
 import lombok.NonNull;
 import lombok.experimental.UtilityClass;
-import org.micds.physics.util.angle.Angle;
-import org.micds.physics.util.angle.AngleUnit;
-import org.micds.physics.util.MathUtil;
+import com.github.iprodigy.physics.util.angle.Angle;
+import com.github.iprodigy.physics.util.angle.AngleUnit;
+import com.github.iprodigy.physics.util.MathUtil;
 
 @UtilityClass
 public class Vectors {
@@ -42,7 +42,7 @@ public class Vectors {
 	 * @param b       the end vector
 	 * @param percent interpolation factor within [0.0, 1.0]
 	 * @return the interpolated vector
-	 * @see org.micds.physics.util.MathUtil#interpolate(double, double, double)
+	 * @see MathUtil#interpolate(double, double, double)
 	 */
 	public static Vector lerp(@NonNull final Vector a, @NonNull final Vector b, final double percent) {
 		return a.multiply(1 - percent).add(b.multiply(percent));

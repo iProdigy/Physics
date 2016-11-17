@@ -1,7 +1,7 @@
-package org.micds.physics.kinematics;
+package com.github.iprodigy.physics.kinematics;
 
-import org.micds.physics.util.angle.AngleUnit;
-import org.micds.physics.util.vector.Vector;
+import com.github.iprodigy.physics.util.angle.AngleUnit;
+import com.github.iprodigy.physics.util.vector.Vector;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

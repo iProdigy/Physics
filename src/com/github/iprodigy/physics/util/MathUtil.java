@@ -1,4 +1,4 @@
-package org.micds.physics.util;
+package com.github.iprodigy.physics.util;
 
 import lombok.experimental.UtilityClass;
 
