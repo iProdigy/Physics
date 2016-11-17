@@ -117,3 +117,21 @@ Vector unit = g.normalized();
 boolean larger = g.compareTo(f) > 0; // true
 ```
 Note that these functions are pure in that they do not mutate the vector but rather return a new values.
+## Chaining Calls
+These immutable values also provide a fluent interface for method chaining.
+```java
+Angle a = new Angle(1125, AngleUnit.DEGREES)
+        .simplified()
+        .subtract(new Angle(15, AngleUnit.DEGREES))
+        .multiply(2.0);
+
+// a → 60°
+```
+```java
+Vector v = new Vector(2.5, 5.0, 7.5)
+        .add(new Vector(4.5, 6.0, 2.5))
+        .divide(5.0)
+        .crossProduct3D(new Vector(1.0, 2.0, 3.0));
+
+// v → components=[2.6, -2.2, 0.6], magnitude=3.4583, angle=41.253°
+```

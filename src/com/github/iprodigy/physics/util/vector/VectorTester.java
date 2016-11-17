@@ -3,21 +3,20 @@ package com.github.iprodigy.physics.util.vector;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import com.github.iprodigy.physics.util.angle.*;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 
-import java.util.*;
+import static com.github.iprodigy.physics.util.angle.AngleUnit.*;
 
 public class VectorTester {
 
 	@Test
 	public void creation() {
 		Vector[] vects = {
-				new Vector(), new Vector(1337, 69, AngleUnit.DEGREES), new Vector(1337, 0.5 * Math.PI, AngleUnit.RADIANS),
-				new Vector(1337, 0.5 * Math.PI, AngleUnit.GRADIANS), new Vector(1337, 0.25, AngleUnit.TURNS),
+				new Vector(), new Vector(1337, 69, DEGREES), new Vector(1337, 0.5 * Math.PI, RADIANS),
+				new Vector(1337, 0.5 * Math.PI, GRADIANS), new Vector(1337, 0.25, TURNS),
 				new Vector(5.0, -10.0, 15.0)
 		};
 
@@ -28,7 +27,7 @@ public class VectorTester {
 	@Test
 	public void addition() {
 		assertEquals(new Vector(20.0, -50.0, 3.5).add(new Vector(-29.0, 25.0, -3.5)), new Vector(-9.0, -25.0, 0.0));
-		assertEquals(new Vector(5.0 * Math.sqrt(2), 45, AngleUnit.DEGREES).add(new Vector(5.0, 5.0)), new Vector(10.0, 10.0));
+		assertEquals(new Vector(5.0 * Math.sqrt(2), 45, DEGREES).add(new Vector(5.0, 5.0)), new Vector(10.0, 10.0));
 	}
 
 	@Test
