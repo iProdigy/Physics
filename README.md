@@ -85,7 +85,7 @@ Vector g = new Vector(new double[] {7.0, 8.0, 9.0});
 List<Double> aComps = a.getComponents(); // []
 List<Double> bComps = b.getComponents(); // [4.5315, 2.1131]
 ```
-Note that these Lists are actually UnmodifiableArrayLists so that Vectors are immutable.
+Note that these Lists are actually instances of UnmodifiableList so that Vectors are immutable.
 #### Addition / Subtraction
 ```java
 Vector add = b.add(c);
