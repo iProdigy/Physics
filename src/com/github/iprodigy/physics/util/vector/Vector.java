@@ -1,6 +1,5 @@
 package com.github.iprodigy.physics.util.vector;
 
-import com.sun.javafx.UnmodifiableArrayList;
 import lombok.NonNull;
 import lombok.Value;
 import com.github.iprodigy.physics.util.abstraction.Computational;
@@ -10,6 +9,7 @@ import com.github.iprodigy.physics.util.angle.AngleUnit;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.DoubleStream;
@@ -24,8 +24,7 @@ public class Vector implements Quantifiable<Double>, Computational<Vector>, Comp
 	private final boolean isUnit;
 
 	public Vector(@NonNull final List<Double> comps) {
-		final int n = comps.size();
-		this.components = new UnmodifiableArrayList<>(comps.toArray(new Double[n]), n);
+		this.components = Collections.unmodifiableList(comps);
 		this.magnitude = getMagnitude();
 		this.angle = new Angle(getDegree(), AngleUnit.DEGREES);
 		this.isUnit = floatsEqual(this.magnitude, 1.0);
@@ -77,7 +76,7 @@ public class Vector implements Quantifiable<Double>, Computational<Vector>, Comp
 				break;
 		}
 
-		this.components = new UnmodifiableArrayList<>(new Double[]{x, y}, 2);
+		this.components = Collections.unmodifiableList(Arrays.asList(x, y));
 		this.magnitude = magnitude;
 		this.isUnit = floatsEqual(this.magnitude, 1.0);
 	}
