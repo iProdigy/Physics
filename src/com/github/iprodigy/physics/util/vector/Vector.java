@@ -99,9 +99,7 @@ public class Vector implements Quantifiable<Double>, Computational<Vector>, Comp
 
 	@Override
 	public Vector multiply(final double scalar) {
-		final List<Double> comps = new ArrayList<>();
-		this.components.forEach(comp -> comps.add(comp * scalar));
-		return new Vector(comps);
+		return new Vector(this.components.stream().map(comp -> comp * scalar).collect(Collectors.toList()));
 	}
 
 	public double dotProduct(final Vector other) {
