@@ -107,6 +107,10 @@ Vector cross = f.crossProduct3D(g);
 Angle angDiff = f.angularDiff(g);
 double degDiff = f.degreeDiff(g);
 ```
+#### Linear Interpolation
+```java
+Vector lerp = f.interpolate(g, 0.50);
+```
 #### Normalization
 ```java
 // Creates a unit vector with the same direction
