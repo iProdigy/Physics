@@ -152,6 +152,10 @@ public class Vector implements Quantifiable<Double>, Computational<Vector>, Comp
 		return Vectors.lerp(this, other, percent);
 	}
 
+	public Vector nlerp(@NonNull final Vector other, final double percent) {
+		return Vectors.nlerp(this, other, percent);
+	}
+
 	public Double getComponent(final int index) {
 		return this.components.get(index);
 	}

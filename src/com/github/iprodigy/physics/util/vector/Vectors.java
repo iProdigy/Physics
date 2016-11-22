@@ -49,6 +49,10 @@ public class Vectors {
 		return a.multiply(1 - delta).add(b.multiply(delta));
 	}
 
+	public static Vector nlerp(@NonNull final Vector a, @NonNull final Vector b, final double percent) {
+		return lerp(a, b, percent).normalized();
+	}
+
 	public static Vector gravity(final int dimensions) {
 		switch (dimensions) {
 			case 2:
