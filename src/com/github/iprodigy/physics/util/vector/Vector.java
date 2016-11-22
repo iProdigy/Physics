@@ -148,6 +148,10 @@ public class Vector implements Quantifiable<Double>, Computational<Vector>, Comp
 		return new Vector(1.0, this.angle);
 	}
 
+	public Vector interpolate(@NonNull final Vector other, final double percent) {
+		return Vectors.lerp(this, other, percent);
+	}
+
 	public Double getComponent(final int index) {
 		return this.components.get(index);
 	}

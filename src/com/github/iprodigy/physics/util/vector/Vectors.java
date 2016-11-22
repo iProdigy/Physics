@@ -45,7 +45,8 @@ public class Vectors {
 	 * @see MathUtil#interpolate(double, double, double)
 	 */
 	public static Vector lerp(@NonNull final Vector a, @NonNull final Vector b, final double percent) {
-		return a.multiply(1 - percent).add(b.multiply(percent));
+		final double delta = MathUtil.clamp(percent, 0.0, 1.0);
+		return a.multiply(1 - delta).add(b.multiply(delta));
 	}
 
 	public static Vector gravity(final int dimensions) {

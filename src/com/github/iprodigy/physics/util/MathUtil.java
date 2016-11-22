@@ -22,7 +22,8 @@ public class MathUtil {
 	}
 
 	public static double interpolate(final double now, final double then, final double percent) {
-		return (1 - percent) * now + percent * then;
+		final double delta = clamp(percent, 0.0, 1.0);
+		return (1 - delta) * now + delta * then;
 	}
 
 	public static Double[] zeroArray(final int dimensions) {
@@ -42,6 +43,10 @@ public class MathUtil {
 		}
 
 		return Math.sqrt(sum);
+	}
+
+	public static <T extends Comparable<T>> T clamp(final T val, final T min, final T max) {
+		return (val.compareTo(min) < 0) ? min : (val.compareTo(max) > 0) ? max : val;
 	}
 
 }
