@@ -11,8 +11,8 @@ public class Vectors {
 	/**
 	 * Standard acceleration due to gravity (g) equalling -9.8 m/s^2
 	 */
-	public static final Double STANDARD_GRAVITY;
-	public static final Vector FORWARD, BACK, UP, DOWN, LEFT, RIGHT, ZERO, ONE, GRAVITY, GRAVITY3D;
+	private static final double STANDARD_GRAVITY;
+	public static final Vector FORWARD, BACK, UP, DOWN, LEFT, RIGHT, ZERO, ONE, GRAVITY, GRAVITY3D, I, J, K;
 
 	public static double dotProduct(final double magA, final double magB, final double deg) {
 		return magA * magB * Math.cos(Math.toRadians(deg));
@@ -32,7 +32,7 @@ public class Vectors {
 		if (a.getMagnitude() == 0.0 || b.getMagnitude() == 0.0)
 			return Angle.ZERO;
 
-		return new Angle(Math.acos((a.dotProduct(b)) / (a.getMagnitude() * b.getMagnitude())), AngleUnit.RADIANS);
+		return new Angle(Math.acos(a.dotProduct(b) / (a.getMagnitude() * b.getMagnitude())), AngleUnit.RADIANS);
 	}
 
 	/**
@@ -62,7 +62,7 @@ public class Vectors {
 				return GRAVITY3D;
 
 			default:
-				final Double[] acceleration = MathUtil.zeroArray(dimensions);
+				final double[] acceleration = new double[dimensions];
 
 				if (dimensions >= 2)
 					acceleration[1] = STANDARD_GRAVITY;
@@ -84,6 +84,9 @@ public class Vectors {
 		RIGHT = new Vector(1.0, 0.0, 0.0);
 		ZERO = new Vector(0.0, 0.0, 0.0);
 		ONE = new Vector(1.0, 1.0, 1.0);
+		I = new Vector(1.0, 0.0, 0.0);
+		J = new Vector(0.0, 1.0, 0.0);
+		K = new Vector(0.0, 0.0, 1.0);
 	}
 
 }

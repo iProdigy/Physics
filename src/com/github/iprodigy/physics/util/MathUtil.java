@@ -26,12 +26,6 @@ public class MathUtil {
 		return (1 - delta) * now + delta * then;
 	}
 
-	public static Double[] zeroArray(final int dimensions) {
-		final Double[] array = new Double[dimensions];
-		Arrays.fill(array, 0.0);
-		return array;
-	}
-
 	public static double dist(final double[] pos1, final double[] pos2) {
 		if (pos1.length != pos2.length)
 			return Double.NaN;

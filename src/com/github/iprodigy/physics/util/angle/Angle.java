@@ -101,7 +101,22 @@ public class Angle implements Quantifiable<Double>, Comparable<Angle>, Computati
 
 	@Override
 	public int compareTo(@NotNull Angle o) {
-		return Double.compare(this.getDegrees(), o.getDegrees());
+		final Angle simpl = this.simplified();
+		return Double.compare(simpl.value, o.simplified().convert(simpl.unit).value);
+	}
+
+	@Override
+	public boolean equals(final Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		final Angle simpl = this.simplified(),
+			other = ((Angle) o).simplified().convert(simpl.unit);
+		return Double.compare(simpl.value, other.value) == 0;
+	}
+
+	@Override
+	public int hashCode() {
+		return Double.hashCode(this.simplified().getDegrees());
 	}
 
 }

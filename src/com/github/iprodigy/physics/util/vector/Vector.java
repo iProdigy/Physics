@@ -24,7 +24,7 @@ public class Vector implements Quantifiable<Double>, Computational<Vector>, Comp
 	private final boolean isUnit;
 
 	public Vector(@NonNull final List<Double> comps) {
-		this.components = Collections.unmodifiableList(comps);
+		this.components = Collections.unmodifiableList(new ArrayList<>(comps));
 		this.magnitude = getMagnitude();
 		this.angle = new Angle(getDegree(), AngleUnit.DEGREES);
 		this.isUnit = floatsEqual(this.magnitude, 1.0);
@@ -35,10 +35,10 @@ public class Vector implements Quantifiable<Double>, Computational<Vector>, Comp
 	}
 
 	public Vector(@NonNull final double[] comps) {
-		this(DoubleStream.of(comps).mapToObj(Double::valueOf).collect(Collectors.toList()));
+		this(DoubleStream.of(comps).boxed().collect(Collectors.toList()));
 	}
 
-	public Vector(final double magnitude, final double angle, final AngleUnit angleUnit) {
+	public Vector(final double magnitude, final double angle, @NonNull final AngleUnit angleUnit) {
 		this(magnitude, new Angle(angle, angleUnit));
 	}
 
@@ -82,7 +82,7 @@ public class Vector implements Quantifiable<Double>, Computational<Vector>, Comp
 	}
 
 	@Override
-	public Vector add(final Vector other) {
+	public Vector add(@NonNull final Vector other) {
 		final List<Double> comps = new ArrayList<>(components);
 
 		for (int i = 0; i < other.numComponents(); i++) {
@@ -101,10 +101,10 @@ public class Vector implements Quantifiable<Double>, Computational<Vector>, Comp
 		return new Vector(this.components.stream().map(comp -> comp * scalar).collect(Collectors.toList()));
 	}
 
-	public double dotProduct(final Vector other) {
+	public double dotProduct(@NonNull final Vector other) {
 		final int n = numComponents();
 		if (n != other.numComponents())
-			throw new IllegalArgumentException("Vector Dot Product cannot be computed with two Vectors of different dimensions");
+			throw new IllegalArgumentException("Dot Product cannot be computed with a vector of differing dimension");
 
 		double sum = 0.0;
 
@@ -145,7 +145,15 @@ public class Vector implements Quantifiable<Double>, Computational<Vector>, Comp
 	}
 
 	public Vector normalized() {
-		return new Vector(1.0, this.angle);
+		return this.multiply(1 / getMagnitude());
+	}
+
+	public Vector projectOnto(@NonNull final Vector axis) {
+		return axis.multiply(this.dotProduct(axis) / axis.getMagnitude());
+	}
+
+	public boolean isOrthogonal(@NonNull final Vector other) {
+		return floatsEqual(this.dotProduct(other), 0);
 	}
 
 	public Vector interpolate(@NonNull final Vector other, final double percent) {
