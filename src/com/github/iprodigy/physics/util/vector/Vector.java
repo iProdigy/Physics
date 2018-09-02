@@ -1,5 +1,6 @@
 package com.github.iprodigy.physics.util.vector;
 
+import com.github.iprodigy.physics.util.MathUtil;
 import lombok.NonNull;
 import lombok.Value;
 import com.github.iprodigy.physics.util.abstraction.Computational;
@@ -81,6 +82,10 @@ public class Vector implements Quantifiable<Double>, Computational<Vector>, Comp
 		this.isUnit = floatsEqual(this.magnitude, 1.0);
 	}
 
+	public Vector(final double[] from, final double[] to) {
+		this(MathUtil.diff(to, from));
+	}
+
 	@Override
 	public Vector add(@NonNull final Vector other) {
 		final List<Double> comps = new ArrayList<>(components);
@@ -148,8 +153,16 @@ public class Vector implements Quantifiable<Double>, Computational<Vector>, Comp
 		return this.multiply(1 / getMagnitude());
 	}
 
+	public Vector orthOn(@NonNull final Vector axis) {
+		return this.subtract(this.projectOnto(axis));
+	}
+
 	public Vector projectOnto(@NonNull final Vector axis) {
-		return axis.multiply(this.dotProduct(axis) / axis.getMagnitude());
+		return axis.multiply(this.componentOf(axis) / axis.getMagnitude());
+	}
+
+	public double componentOf(@NonNull final Vector axis) {
+		return this.dotProduct(axis) / axis.getMagnitude();
 	}
 
 	public boolean isOrthogonal(@NonNull final Vector other) {
@@ -170,6 +183,10 @@ public class Vector implements Quantifiable<Double>, Computational<Vector>, Comp
 
 	public int numComponents() {
 		return this.components.size();
+	}
+
+	public double[] getMatrix() {
+		return this.components.stream().mapToDouble(Double::doubleValue).toArray();
 	}
 
 	@Override

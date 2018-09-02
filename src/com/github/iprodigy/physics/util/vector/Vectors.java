@@ -18,6 +18,17 @@ public class Vectors {
 		return magA * magB * Math.cos(Math.toRadians(deg));
 	}
 
+	public static double tripleProduct(final Vector a, final Vector b, final Vector c) {
+		if (a.numComponents() != b.numComponents() || b.numComponents() != c.numComponents())
+			throw new IllegalArgumentException("Vectors must be of the same dimension");
+
+		if (a.numComponents() == 3)
+			return a.dotProduct(b.crossProduct3D(c));
+
+		final double[][] matrix = {a.getMatrix(), b.getMatrix(), c.getMatrix()};
+		return MathUtil.determinant(matrix);
+	}
+
 	public static Vector crossProduct3D(@NonNull final Vector a, @NonNull final Vector b) {
 		if (a.numComponents() != b.numComponents() || a.numComponents() != 3)
 			throw new IllegalArgumentException("Both Vectors must occupy three dimensions");

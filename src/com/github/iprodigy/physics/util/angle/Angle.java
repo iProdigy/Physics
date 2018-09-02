@@ -1,5 +1,6 @@
 package com.github.iprodigy.physics.util.angle;
 
+import lombok.NonNull;
 import lombok.Value;
 import lombok.experimental.Wither;
 import org.jetbrains.annotations.NotNull;
@@ -12,14 +13,14 @@ import static com.github.iprodigy.physics.util.angle.AngleUnit.*;
 
 @Value
 public class Angle implements Quantifiable<Double>, Comparable<Angle>, Computational<Angle> {
-	public static final Angle ZERO = new Angle(0.0, RADIANS);
+	public static final Angle ZERO = new Angle(0.0, RADIANS), RIGHT = new Angle(90, DEGREES);
 
 	@Wither
 	private final double value;
 	private final AngleUnit unit;
 
-	public Angle convert(final AngleUnit to) {
-		return (to == this.unit) ? this : new Angle(this.value * this.unit.convFactor(to), to);
+	public Angle convert(@NonNull final AngleUnit to) {
+		return new Angle(this.value * this.unit.convFactor(to), to);
 	}
 
 	public Angle simplified() {
