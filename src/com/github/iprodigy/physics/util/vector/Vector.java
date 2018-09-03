@@ -1,12 +1,12 @@
 package com.github.iprodigy.physics.util.vector;
 
 import com.github.iprodigy.physics.util.MathUtil;
-import lombok.NonNull;
-import lombok.Value;
 import com.github.iprodigy.physics.util.abstraction.Computational;
 import com.github.iprodigy.physics.util.abstraction.Quantifiable;
 import com.github.iprodigy.physics.util.angle.Angle;
 import com.github.iprodigy.physics.util.angle.AngleUnit;
+import lombok.NonNull;
+import lombok.Value;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -194,4 +194,25 @@ public class Vector implements Quantifiable<Double>, Computational<Vector>, Comp
 		return Double.compare(this.magnitude, o.magnitude);
 	}
 
+	@Override
+	public boolean equals(final Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		final Vector other = (Vector) o;
+		if (this.components.size() != other.components.size()) return false;
+		for (int i = 0; i < this.components.size(); i++) {
+			if (!floatsEqual(this.getComponent(i), other.getComponent(i)))
+				return false;
+		}
+		return true;
+	}
+
+	@Override
+	public int hashCode() {
+		int hash = 17;
+		for (final Double d : this.getComponents()) {
+			hash = 31 * hash + Double.hashCode(MathUtil.round(d, 6));
+		}
+		return hash;
+	}
 }

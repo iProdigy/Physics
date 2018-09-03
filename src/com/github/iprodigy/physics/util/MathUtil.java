@@ -2,12 +2,18 @@ package com.github.iprodigy.physics.util;
 
 import lombok.experimental.UtilityClass;
 
+import java.math.BigDecimal;
+
 @UtilityClass
 public class MathUtil {
-	private static final double EPSILON = 0.0000001;
+	public static final double EPSILON = 0.0000001;
 
 	public static boolean floatsEqual(final double a, final double b) {
 		return Math.abs(a - b) < EPSILON;
+	}
+
+	public static double round(final double value, final int decimals) {
+		return new BigDecimal(value).setScale(decimals, BigDecimal.ROUND_HALF_UP).doubleValue();
 	}
 
 	public static int getQuadrant(final double degrees) {
