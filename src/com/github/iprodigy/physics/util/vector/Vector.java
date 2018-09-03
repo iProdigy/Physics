@@ -191,7 +191,7 @@ public class Vector implements Quantifiable<Double>, Computational<Vector>, Comp
 
 	@Override
 	public int compareTo(@NonNull final Vector o) {
-		return Double.compare(this.magnitude, o.magnitude);
+		return MathUtil.fuzzyCompare(this.magnitude, o.magnitude);
 	}
 
 	@Override

@@ -12,6 +12,10 @@ public class MathUtil {
 		return Math.abs(a - b) < EPSILON;
 	}
 
+	public static int fuzzyCompare(final double a, final double b) {
+		return floatsEqual(a, b) ? 0 : Double.compare(a, b);
+	}
+
 	public static double round(final double value, final int decimals) {
 		return new BigDecimal(value).setScale(decimals, BigDecimal.ROUND_HALF_UP).doubleValue();
 	}
