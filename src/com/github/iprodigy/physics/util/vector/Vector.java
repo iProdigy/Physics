@@ -199,8 +199,8 @@ public class Vector implements Quantifiable<Double>, Computational<Vector>, Comp
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		final Vector other = (Vector) o;
-		if (this.components.size() != other.components.size()) return false;
-		for (int i = 0; i < this.components.size(); i++) {
+		if (this.numComponents() != other.numComponents()) return false;
+		for (int i = 0; i < this.numComponents(); i++) {
 			if (!floatsEqual(this.getComponent(i), other.getComponent(i)))
 				return false;
 		}
@@ -211,7 +211,7 @@ public class Vector implements Quantifiable<Double>, Computational<Vector>, Comp
 	public int hashCode() {
 		int hash = 17;
 		for (final Double d : this.getComponents()) {
-			hash = 31 * hash + Double.hashCode(MathUtil.round(d, 6));
+			hash = 31 * hash + Double.hashCode(MathUtil.round(d, 5)); // decimals = -log(epsilon) - 1
 		}
 		return hash;
 	}

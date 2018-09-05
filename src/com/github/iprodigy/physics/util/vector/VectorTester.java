@@ -1,13 +1,14 @@
 package com.github.iprodigy.physics.util.vector;
 
-import com.github.iprodigy.physics.util.MathUtil;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.github.iprodigy.physics.util.MathUtil.EPSILON;
 import static com.github.iprodigy.physics.util.angle.AngleUnit.*;
+import static java.lang.Math.ulp;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
@@ -65,8 +66,8 @@ public class VectorTester {
 		final Vector a = new Vector(1.0, -2.0, 4.0, -8.0),
 			b = new Vector(1.5, 3.0, -6.0, -12.0);
 		final double dot = a.dotProduct(b);
-		assertEquals(67.5, dot, MathUtil.EPSILON);
-		assertEquals(dot, Vectors.dotProduct(a.getMagnitude(), b.getMagnitude(), a.degreeDiff(b)), MathUtil.EPSILON);
+		assertEquals(67.5, dot, EPSILON);
+		assertEquals(dot, Vectors.dotProduct(a.getMagnitude(), b.getMagnitude(), a.degreeDiff(b)), EPSILON);
 	}
 
 	@Test
@@ -133,9 +134,9 @@ public class VectorTester {
 		assertEquals(new Vector(1.0), new Vector(1.0));
 		assertEquals(new Vector(0.0), new Vector(-0.0));
 		assertEquals(new Vector(0.0).hashCode(), new Vector(-0.0).hashCode());
-		assertEquals(new Vector(2.0, 4.0, 8.0), new Vector(1.99999999999, 4.00000000001, 7.999999999));
+		assertEquals(new Vector(2.0, 4.0, 8.0), new Vector(2.0 - ulp(2.0), 4.0 + ulp(4), 8.0 - ulp(8.0)));
 		assertEquals(new Vector(2.0, 4.0, 8.0).hashCode(),
-			new Vector(2 - MathUtil.EPSILON, 4 + MathUtil.EPSILON, 8 - MathUtil.EPSILON).hashCode());
+			new Vector(2.0 - ulp(2.0), 4.0 + ulp(4.0), 8.0 - ulp(8.0)).hashCode());
 		assertNotEquals(new Vector(1.0, 2.0, 3.0, 4.0, 5.0).hashCode(),
 			new Vector(5.0, 4.0, 3.0, 2.0, 1.0).hashCode());
 	}

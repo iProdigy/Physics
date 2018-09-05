@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 
 @UtilityClass
 public class MathUtil {
-	public static final double EPSILON = 0.0000001;
+	public static final double EPSILON = 1.0E-06;
 
 	public static boolean floatsEqual(final double a, final double b) {
 		return Math.abs(a - b) < EPSILON;
